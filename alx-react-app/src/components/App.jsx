@@ -1,13 +1,9 @@
-import React from 'react';
-import WelcomeMessage from './WelcomeMessage';
-
+import WelcomeMessage from './components/WelcomeMessage';
 function App() {
-  return (
-    <div>
-      <WelcomeMessage />
-    </div>
-  );
+    return (
+        <div>
+            <WelcomeMessage />
+        </div>
+    );
 }
-
-export default App;
 
