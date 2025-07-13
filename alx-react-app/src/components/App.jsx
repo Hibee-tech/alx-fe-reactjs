@@ -1,9 +1,10 @@
-import WelcomeMessage from './WelcomeMessage'; // ✅ exact import path as per instruction
+import React from 'react';
+import WelcomeMessage from './WelcomeMessage';
 
 function App() {
   return (
     <div>
-      <WelcomeMessage /> {/* ✅ render the component */}
+      <WelcomeMessage />
     </div>
   );
 }
