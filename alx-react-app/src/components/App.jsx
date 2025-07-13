@@ -1,3 +1,4 @@
+import React from 'react';
 import WelcomeMessage from './components/WelcomeMessage';
 
 function App() {
@@ -7,4 +8,7 @@ function App() {
     </div>
   );
 }
+
+export default App;
+
 
