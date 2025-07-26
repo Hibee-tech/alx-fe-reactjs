@@ -1,3 +1,4 @@
+import SearchBar from './components/SearchBar';
 import { Routes, Route, Link } from 'react-router-dom';
 import RecipeDetails from './components/RecipeDetails';
 import RecipeList from './components/RecipeList';
@@ -30,6 +31,7 @@ function App() {
           <>
             <AddRecipeForm />
             <RecipeList />
+              <SearchBar />
           </>
         } />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
