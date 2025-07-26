@@ -1,3 +1,5 @@
+import { Routes, Route, Link } from 'react-router-dom';
+import RecipeDetails from './components/RecipeDetails';
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
 import { useState } from 'react'
@@ -22,6 +24,16 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+
+          <Routes>
+        <Route path="/" element={
+          <>
+            <AddRecipeForm />
+            <RecipeList />
+          </>
+        } />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+      </Routes>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
