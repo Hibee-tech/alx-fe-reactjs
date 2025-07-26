@@ -6,6 +6,8 @@ import AddRecipeForm from './components/AddRecipeForm';
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg' import './App.css'
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,6 +34,8 @@ function App() {
             <AddRecipeForm />
             <RecipeList />
               <SearchBar />
+               <FavoritesList />
+                <RecommendationsList />
           </>
         } />
         <Route path="/recipe/:id" element={<RecipeDetails />} />

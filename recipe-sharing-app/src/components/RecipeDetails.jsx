@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useRecipeStore } from './RecipeStore';
 import EditRecipeForm from './EditRecipeForm';
 import DeleteRecipeButton from './DeleteRecipeButton';
+import FavoriteToggleButton from './FavoriteToggleButton';
 
 const RecipeDetails = () => {
   const { id } = useParams();
