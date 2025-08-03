@@ -1,36 +1,53 @@
 import React, { useState } from 'react';
-import fetchUserData from '../services/githubService';
+import fetchAdvancedUsers from '../services/githubService';
 
-const SearchBar = () => {
+const Search = () => {
   const [username, setUsername] = useState('');
-  const [userData, setUserData] = useState(null);
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setUserData(null);
-    setError(null);
     setLoading(true);
+    setError('');
+    setUsers([]);
 
     try {
-      const data = await fetchUserData(username);
-      setUserData(data);
+      const data = await fetchAdvancedUsers({ username, location, minRepos });
+      setUsers(data.items || []);
+      if (!data.items.length) {
+        setError('Looks like we cant find the user');
+      }
     } catch (err) {
-      setError('Looks like we cant find the user.');
+      setError('Looks like we cant find the user');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div >
+    <div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter GitHub username"
+        />
+        <input
+          type="text"
+          placeholder="Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Minimum Public Repos"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
         />
         <button
           type="submit"
@@ -39,29 +56,35 @@ const SearchBar = () => {
         </button>
       </form>
 
-      {/* Conditional Rendering */}
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      {userData && (
+
+      {users.length > 0 && (
         <div>
-          <img
-            src={userData.avatar_url}
-            alt={userData.login}
-          />
-          <h2>{userData.name || userData.login}</h2>
-          <p>
-            <a
-              href={userData.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
+          {users.map((user) => (
+            <div
+              key={user.id}
             >
-              View GitHub Profile
-            </a>
-          </p>
+              <img
+                src={user.avatar_url}
+                alt={user.login}
+              />
+              <div>
+                <h2>{user.login}</h2>
+                <a
+                  href={user.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View Profile
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
   );
 };
 
-export default SearchBar;
+export default Search;
