@@ -16,22 +16,22 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 space-y-2">
-      <h2 className="text-xl font-semibold">Add a New Recipe</h2>
+    <form onSubmit={handleSubmit} className="add-recipe-form">
+      <h2 className="form-title">Add a New Recipe</h2>
       <input
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
-        className="border p-1 w-full"
+        className="form-input"
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Description"
-        className="border p-1 w-full"
+        className="form-textarea"
       />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-1 rounded">
+      <button type="submit" className="form-button">
         Add Recipe
       </button>
     </form>

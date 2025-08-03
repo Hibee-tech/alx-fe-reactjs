@@ -1,26 +1,35 @@
-import { useParams } from 'react-router-dom';
-import { useRecipeStore } from './RecipeStore';
-import EditRecipeForm from './EditRecipeForm';
-import DeleteRecipeButton from './DeleteRecipeButton';
-import FavoriteToggleButton from './FavoriteToggleButton';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useRecipeStore } from '../store/recipeStore';
 
-const RecipeDetails = () => {
+const RecipeDetail = () => {
   const { id } = useParams();
-  const recipe = useRecipeStore((state) =>
-    state.recipes.find((r) => r.id === parseInt(id))
-  );
+  const navigate = useNavigate();
+  const { recipes, deleteRecipe, toggleFavorite, favorites } = useRecipeStore();
 
-  if (!recipe) return <p>Recipe not found</p>;
+  const recipe = recipes.find((r) => r.id === Number(id));
+  const isFavorite = favorites.includes(Number(id));
+
+  if (!recipe) {
+    return <div className="recipe-detail-container">Recipe not found.</div>;
+  }
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-2">{recipe.title}</h1>
-      <p className="mb-4">{recipe.description}</p>
-
-      <EditRecipeForm recipe={recipe} />
-      <DeleteRecipeButton recipeId={recipe.id} />
+    <div className="recipe-detail-container">
+      <h2 className="recipe-detail-title">{recipe.title}</h2>
+      <p className="recipe-detail-description">{recipe.description}</p>
+      <div className="recipe-detail-buttons">
+        <button className="delete-btn" onClick={() => {
+          deleteRecipe(recipe.id);
+          navigate('/');
+        }}>
+          Delete
+        </button>
+        <button className="favorite-btn" onClick={() => toggleFavorite(recipe.id)}>
+          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        </button>
+      </div>
     </div>
   );
 };
 
-export default RecipeDetails;
+export default RecipeDetail;

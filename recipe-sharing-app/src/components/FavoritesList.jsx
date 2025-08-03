@@ -1,26 +1,35 @@
-import { useRecipeStore } from './RecipeStore';
 import { Link } from 'react-router-dom';
+import { useRecipeStore } from '../store/recipeStore';
 
 const FavoritesList = () => {
-  const favorites = useRecipeStore((state) =>
-    state.favorites.map((id) => state.recipes.find((r) => r.id === id)).filter(Boolean)
-  );
+  const recipes = useRecipeStore((state) => state.recipes || []);
+  const favoriteIds = useRecipeStore((state) => state.favorites || []);
+
+  // Guard clause: Still undefined or not arrays
+  if (!Array.isArray(recipes) || !Array.isArray(favoriteIds)) {
+    return <p className="favorites-error">Unable to load favorites.</p>;
+  }
+
+  const favoriteRecipes = favoriteIds
+    .map((id) => recipes.find((r) => r?.id === id))
+    .filter(Boolean); // remove null/undefined
+
+  if (favoriteRecipes.length === 0) {
+    return <p className="favorites-empty">No favorites yet.</p>;
+  }
 
   return (
-    <div className="mt-6">
-      <h2 className="text-xl font-semibold mb-2">My Favorites</h2>
-      {favorites.length === 0 ? (
-        <p>No favorites yet.</p>
-      ) : (
-        favorites.map((recipe) => (
-          <div key={recipe.id} className="border p-2 mb-2 rounded">
-            <Link to={`/recipe/${recipe.id}`} className="font-bold text-blue-600 hover:underline">
+    <div className="favorites-list">
+      <h2 className="favorites-title">Favorite Recipes</h2>
+      <ul className="favorites-items">
+        {favoriteRecipes.map((recipe) => (
+          <li key={recipe.id} className="favorite-item">
+            <Link to={`/recipe/${recipe.id}`} className="favorite-link">
               {recipe.title}
             </Link>
-            <p>{recipe.description}</p>
-          </div>
-        ))
-      )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

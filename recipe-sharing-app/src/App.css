@@ -1,42 +1,364 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* App.css */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #ffe4e6, #ccfbf1);
+  color: #333;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 1rem;
+  margin-bottom: 2rem;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #4f46e5;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  flex: 1;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.app-footer {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #666;
+  padding: 1rem 0;
+  border-top: 1px solid #ddd;
 }
 
-.card {
-  padding: 2em;
+.add-recipe-form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #f9f9f9;
+  border-radius: 1rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
 }
 
-.read-the-docs {
-  color: #888;
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-input,
+.form-textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+  background-color: #1e40af;
+}
+
+/* App.css (global stylesheet) */
+
+.recipe-list {
+  padding: 1.5rem;
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+.recipe-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.recipe-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: box-shadow 0.2s ease;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #007acc;
+  margin-bottom: 0.5rem;
+}
+
+.recipe-card p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 0.75rem;
+}
+
+.recipe-card-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.recipe-button {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.recipe-button.view {
+  background-color: #007acc;
+  color: white;
+}
+
+.recipe-button.favorite {
+  background-color: #f9a825;
+  color: white;
+}
+
+.recipe-button.delete {
+  background-color: #e53935;
+  color: white;
+}
+
+/* App.css - FavoritesList styles */
+
+.favorites-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.favorites-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.favorite-empty {
+  font-size: 1rem;
+  color: #777;
+}
+
+.favorite-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: box-shadow 0.2s ease;
+}
+
+.favorite-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.favorite-card a {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #007acc;
+  text-decoration: none;
+}
+
+.favorite-card a:hover {
+  text-decoration: underline;
+}
+
+.favorite-card p {
+  font-size: 1rem;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+/* App.css - RecipeDetail styles */
+
+.recipe-detail-container {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.recipe-detail-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.recipe-detail-description {
+  font-size: 1.125rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.recipe-detail-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.recipe-detail-buttons button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.recipe-detail-buttons .delete-btn {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.recipe-detail-buttons .delete-btn:hover {
+  background-color: #c0392b;
+  transform: translateY(-1px);
+}
+
+.recipe-detail-buttons .favorite-btn {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.recipe-detail-buttons .favorite-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+
+/* App.css - SearchBar styles */
+
+.search-bar {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+/* In App.css */
+
+.recommendations {
+  padding: 1rem;
+  margin-top: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.recommendations-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.recommendation-item {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background-color: white;
+  transition: transform 0.2s ease;
+}
+
+.recommendation-item:hover {
+  transform: scale(1.02);
+  border-color: #888;
+}
+
+.recommendation-link {
+  font-weight: bold;
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.recommendation-link:hover {
+  text-decoration: underline;
+}
+
+.recommendation-description {
+  margin-top: 0.5rem;
+  color: #555;
 }

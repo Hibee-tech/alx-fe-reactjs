@@ -1,4 +1,4 @@
-import { useRecipeStore } from './RecipeStore';
+import { useRecipeStore } from '../store/recipeStore';
 
 const FavoriteToggleButton = ({ recipeId }) => {
   const favorites = useRecipeStore((s) => s.favorites);
