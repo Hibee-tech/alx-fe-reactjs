@@ -1,4 +1,4 @@
-
+import SearchBar from './components/SearchBar';
 import './App.css'
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
     <>
      <div className="app">
         <h1>GitHub User Search</h1>
+         <SearchBar />
       </div>
       
     </>
