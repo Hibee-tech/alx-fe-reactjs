@@ -28,8 +28,9 @@ function App() {
           }
         />
 
-        {/* Dynamic Route */}
-        <Route path="/blog/:postId" element={<BlogPost />} />
+      {/* Dynamic Route */}
+<Route path="/blog/:id" element={<BlogPost />} />
+
 
         {/* Redirect unknown paths */}
         <Route path="*" element={<Navigate to="/" replace />} />
