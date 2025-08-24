@@ -1,5 +1,27 @@
-import { useState } from "react";
-import AddTodoForm from "./AddTodoForm";
+import React, { useState } from "react";
+
+function AddTodoForm({ onAdd }) {
+  const [text, setText] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!text.trim()) return;
+    onAdd(text);
+    setText("");
+  };
+
+  return (
+    <form onSubmit={handleSubmit} aria-label="add-todo-form">
+      <input
+        type="text"
+        placeholder="Add a new todo"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <button type="submit">Add</button>
+    </form>
+  );
+}
 
 export default function TodoList() {
   const [todos, setTodos] = useState([
@@ -8,7 +30,8 @@ export default function TodoList() {
   ]);
 
   const addTodo = (text) => {
-    setTodos([...todos, { id: Date.now(), text, completed: false }]);
+    const newTodo = { id: Date.now(), text, completed: false };
+    setTodos([...todos, newTodo]);
   };
 
   const toggleTodo = (id) => {
@@ -31,13 +54,21 @@ export default function TodoList() {
         {todos.map((todo) => (
           <li
             key={todo.id}
+            onClick={() => toggleTodo(todo.id)}
             style={{
               textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
             }}
           >
-            <span onClick={() => toggleTodo(todo.id)}>{todo.text}</span>
-            <button onClick={() => deleteTodo(todo.id)}>❌</button>
+            {todo.text}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTodo(todo.id);
+              }}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
